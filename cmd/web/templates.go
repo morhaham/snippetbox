@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/url"
 	"path/filepath"
 	"text/template"
 	"time"
@@ -12,6 +13,8 @@ type templateData struct {
 	Snippet     *models.Snippet
 	Snippets    []*models.Snippet
 	CurrentYear int
+	FormErrors  map[string]string
+	FormData    url.Values
 }
 
 func humanDate(t time.Time) string {
