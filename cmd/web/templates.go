@@ -1,11 +1,11 @@
 package main
 
 import (
-	"net/url"
 	"path/filepath"
 	"text/template"
 	"time"
 
+	"github.com/morhaham/snippetbox/pkg/forms"
 	"github.com/morhaham/snippetbox/pkg/models"
 )
 
@@ -13,8 +13,7 @@ type templateData struct {
 	Snippet     *models.Snippet
 	Snippets    []*models.Snippet
 	CurrentYear int
-	FormErrors  map[string]string
-	FormData    url.Values
+	Form        *forms.Form
 }
 
 func humanDate(t time.Time) string {
