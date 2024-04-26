@@ -37,7 +37,10 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	flash := app.session.PopString(r, "flash")
+
 	data := &templateData{
+		Flash:   flash,
 		Snippet: snippet,
 	}
 	app.render(w, r, "show.page.tmpl", data)
@@ -65,6 +68,7 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
+	app.session.Put(r, "flash", "Snippet successfully created!")
 
 	http.Redirect(w, r, fmt.Sprintf("/snippet/%d", id), http.StatusSeeOther)
 }
