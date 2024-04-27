@@ -2,6 +2,7 @@ package forms
 
 import (
 	"fmt"
+	"net/mail"
 	"net/url"
 	"unicode/utf8"
 )
@@ -48,6 +49,27 @@ func (f *Form) PermittedValues(field string, opts ...string) {
 		}
 	}
 	f.Errors.Add(field, "This field is invalid")
+}
+
+func (f *Form) MinLength(field string, d int) {
+	value := f.Get(field)
+	if value == "" {
+		return
+	}
+	if utf8.RuneCountInString(value) < d {
+		f.Errors.Add(field, fmt.Sprintf("This field is too short(minimum is %d characters)", d))
+	}
+}
+
+func (f *Form) ValidateEmail(field string) {
+	value := f.Get(field)
+	if value == "" {
+		return
+	}
+	_, err := mail.ParseAddress(value)
+	if err != nil {
+		f.Errors.Add(field, "invalid email")
+	}
 }
 
 func (f *Form) Valid() bool {
