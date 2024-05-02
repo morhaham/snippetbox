@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	ErrorNoRecord        = errors.New("models: no matching record found")
-	ErInvalidCredentials = errors.New("models: invalid credentials")
-	ErrDuplicateEmail    = errors.New("models: duplicate email")
+	ErrorNoRecord         = errors.New("models: no matching record found")
+	ErrInvalidCredentials = errors.New("models: invalid credentials")
+	ErrDuplicateEmail     = errors.New("models: duplicate email")
 )
 
 type Snippet struct {
